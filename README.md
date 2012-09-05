@@ -2,11 +2,11 @@
 
 CSS Transition allows to write simple animation directly in CSS. It’s simpler,
 faster and cleaner, that JavaScript animation by `jQuery.fn.animate`.
-But, sometimes we need good old complete callback in JavaScript for
+But sometimes we need good old complete callback in JavaScript for
 CSS Transitions animation (for example, if our animation isn’t so simple).
 
-This jQuery plugin allows to set listeners to [CSS Transition] animation end or
-specify part:
+This jQuery plugin allows to set listeners to [CSS Transitions] animation end or
+specific part:
 
 CSS with transitions:
 ```css
@@ -44,18 +44,18 @@ Plugin requires jQuery 1.8 or higher.
 
 Sponsored by [Evil Martians].
 
-[CSS Transition]: https://developer.mozilla.org/en-US/docs/CSS/Using_CSS_transitions
-[Evil Martians]:  http://evilmartians.com/
+[CSS Transitions]: https://developer.mozilla.org/en-US/docs/CSS/Using_CSS_transitions
+[Evil Martians]:   http://evilmartians.com/
 
-## transitionEnd
+## $.fn.transitionEnd
 
-New browsers have `transitionend` event. But some old browsers didsn’t
-support CSS Transitions (and this event), another need vendor prefix for
+Modern browsers have `transitionend` event. But some old browsers don’t support
+CSS Transitions (and this event), and others require vendor prefix for
 event name.
 
-This plugin add syntax sugar and hide vendor prefix problem from you. If browser
-doesn’t have support, callbacks will be call immediately (because there is no
-animation).
+This plugin adds syntax sugar and hides vendor prefix problem from you.
+If browser doesn’t have support, callbacks will be called immediately
+(because there is no animation).
 
 If transition is set for several properties, `$.fn.transitionEnd` will execute
 callback on every property. For example:
@@ -76,15 +76,16 @@ $('.car').addClass('at-home').transitionEnd(function (e) {
 
 This code will print `"top 1"` and `"left 4"`.
 
-Note, if transition will be canceled before finish (for example, you add
-transition to hover effect, and object loose hover, before transition will end),
-`$.fn.transitionEnd` willn’t execute callback.
+Note, if transition is canceled before finishing (for example, you add
+transition to hover effect, and object looses hover, before transition
+will ends), `$.fn.transitionEnd` won’t execute callback.
 
-## transitionAt
+## $.fn.transitionAt
 
-Also plugin has additional `$.fn.transitionAt` to set callback to some part of
-transition (on half part for example, to hide backface on rotate animation).
-Callback will be called on after `delay + (durationPart * duration)`.
+Also plugin has additional `$.fn.transitionAt` function to set callback
+to some part of transition (for example in the middle of animation, to hide
+backface on rotate animation). Callback will be called after
+`delay + (durationPart * duration)`.
 
 If transition is set for several properties, `$.fn.transitionEnd` will execute
 callback on every property.
@@ -94,19 +95,20 @@ Note, that `transitionAt` callback will be fired even if transition is canceled
 
 ## Event object
 
-Callbacks will get object with properties:
-* `type` – event name. For `transitionend` event it will be often with vendor
-   prefix. For `$.fn.transitionAt` it will be `transitionat`.
+Callbacks get object with properties:
+* `type` – event name. For `transitionend` event it will be often have
+   vendor prefix. For `$.fn.transitionAt` it will be `transitionat`.
 * `currentTarget` – DOM node with CSS transition.
-* `propertyName` – CSS property name, which have transition. it will be empty,
-  if CSS Transitions isn’t supported.
+* `propertyName` – CSS property name, which has transition. it will be empty,
+  if CSS Transitions aren’t supported.
 * `elapsedTime` – number of seconds the transition had been running at the time
   the event fired. This value isn't affected by the value of `transition-delay`.
   It will be zero, if CSS Transitions isn’t supported.
 
 If CSS Transition is supported, `$.fn.transitionEnd` will send original browser
-event to callback (with this properties too). Another calls will be received
-simple object with just this 4 properties.
+event to callback (with this properties too). If you use `$.fn.transitionAt` or
+there is no CSS Transitions support, callback will receive simple object
+with just these 4 properties.
 
 ## Extra
 
@@ -144,7 +146,7 @@ For Ruby on Rails you can use gem for Assets Pipeline.
 
 ### Others
 
-If you don’t use any assets packaging manager (it’s very bad idea), you can use
+If you don’t use any assets packaging manager (that’s very bad idea), you can use
 already minified version of the library.
 Take it from: <https://github.com/ai/transition-events/downloads>.
 
