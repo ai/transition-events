@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name        = 'transition_events_js'
-  s.version     = '0.0.0'
+  s.version     = '0.1'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Andrey "A.I" Sitnik']
   s.email       = ['andrey@sitnik.ru']
