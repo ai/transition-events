@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 Gem::Specification.new do |s|
-  s.name        = 'jQuery Transition Events'
+  s.name        = 'transition_events_js'
   s.version     = '0.0.0'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Andrey "A.I" Sitnik']
