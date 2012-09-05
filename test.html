@@ -5,20 +5,73 @@
         <title>jQuery Transition Events Test</title>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script src="lib/transition-events.js"></script>
+        <style>
+            #road {
+                position: relative;
+                width: 80%;
+                height: 5px;
+                margin: 90px auto 0 auto;
+                background: #ccc;
+            }
+            #road i {
+                display: inline-block;
+                position: absolute;
+                top: -20px;
+                padding-left: 5px;
+                border-left: 1px solid black;
+                height: 20px
+            }
+            #car {
+                width: 10px;
+                height: 10px;
+                background: red;
+                position: absolute;
+                top: 150px;
+                left: 0;
+                -webkit-transition-property: top, left;
+                -webkit-transition-delay:    0.5s, 0;
+                -webkit-transition-duration: 0.5s, 2s;
+                -webkit-transition-timing-function: linear;
+                -moz-transition-property: top, left;
+                -moz-transition-delay:    0.5s, 0;
+                -moz-transition-duration: 0.5s, 2s;
+                -moz-transition-timing-function: linear;
+                transition-property: top, left;
+                transition-delay:    0.5s, 0;
+                transition-duration: 0.5s, 2s;
+                transition-timing-function: linear;
+            }
+            #car.at-home {
+                top: 25px;
+                left: 100%;
+            }
+        </style>
     </head>
     <body>
         <h1>jQuery Transition Events Test</h1>
         <p>
-          Support: <b id="support"></b>.
-          Event name: <b id="event"></b>.
-          Property name: <b id="property"></b>.
+            Support: <b id="support"></b>.
+            Event name: <b id="event"></b>.
+            Property name: <b id="property"></b>.
         </p>
+        <div id="road">
+            <div id="car"></div>
+        </div>
         <script>
             jQuery(document).ready(function ($) {
                 $('#support').text(
                   $.TransitionEvents.isSupported() ? 'Yes' : 'No');
                 $('#event').text($.TransitionEvents.cachedEvent);
                 $('#property').text($.TransitionEvents.cachedProp);
+
+                var road = $('#road');
+                var car  = $('#car');
+                $('#car').addClass('at-home').transitionEnd(function(e) {
+                    $('<i>').
+                      text(e.propertyName + ' ' + e.elapsedTime).
+                      css('left', car.css('left')).
+                      appendTo(road)
+                });
             });
         </script>
     </body>
