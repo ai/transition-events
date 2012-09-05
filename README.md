@@ -153,3 +153,12 @@ Take it from: <https://github.com/ai/transition-events/downloads>.
 ## Contributing
 
 Open `test.html` in repository to run intergration tests.
+
+## License
+
+Plugin is licensed under the GNU Lesser General Public License version 3.
+See the LICENSE file or http://www.gnu.org/licenses/lgpl.html.
+
+## Author
+
+Andrey “A.I.” Sitnik <andrey@sitnik.ru>
