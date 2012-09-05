@@ -8,7 +8,18 @@
     </head>
     <body>
         <h1>jQuery Transition Events Test</h1>
+        <p>
+          Support: <b id="support"></b>.
+          Event name: <b id="event"></b>.
+          Property name: <b id="property"></b>.
+        </p>
         <script>
+            jQuery(document).ready(function ($) {
+                $('#support').text(
+                  $.TransitionEvents.isSupported() ? 'Yes' : 'No');
+                $('#event').text($.TransitionEvents.cachedEvent);
+                $('#property').text($.TransitionEvents.cachedProp);
+            });
         </script>
     </body>
 </html>
