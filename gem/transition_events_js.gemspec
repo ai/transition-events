@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Andrey "A.I" Sitnik']
   s.email       = ['andrey@sitnik.ru']
   s.homepage    = 'https://github.com/ai/transition-events'
-  s.summary     = ''
-  s.description = ''
+  s.summary     = 'jQuery plugin to set listeners for CSS Transition ' +
+                  'animation end or specify part.'
 
   s.add_dependency 'sprockets', '>= 2'
 
