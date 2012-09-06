@@ -31,13 +31,13 @@ task 'gem', 'Build RubyGem package', ->
   copy = require('fs-extra/lib/copy').copyFileSync
   copy('lib/transition-events.js',
        'build/lib/assets/javascripts/transition-events.js')
-  copy('gem/transition_events_js.gemspec', 'build/transition_events_js.gemspec')
+  copy('gem/transition-events-js.gemspec', 'build/transition-events-js.gemspec')
   copy('gem/transition_events_js.rb',      'build/lib/transition_events_js.rb')
   copy('README.md',                        'build/README.md')
   copy('ChangeLog',                        'build/ChangeLog')
   copy('LICENSE',                          'build/LICENSE')
 
-  exec 'cd build/; gem build transition_events_js.gemspec', (error, message) ->
+  exec 'cd build/; gem build transition-events-js.gemspec', (error, message) ->
     if error
       process.stderr.write(error.message)
       process.exit(1)

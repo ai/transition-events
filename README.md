@@ -145,10 +145,10 @@ $.Transitions.animFrame(function () {
 
 For Ruby on Rails you can use gem for Assets Pipeline.
 
-1. Add `transition_events_js` gem to `Gemfile`:
+1. Add `transition-events-js` gem to `Gemfile`:
 
    ```ruby
-   gem "transition_events_js"
+   gem "transition-events-js"
    ```
 
 2. Install gems:
