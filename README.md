@@ -19,9 +19,6 @@ CSS with transitions:
     .slider.video-position {
         left: -100px;
         }
-    .slider.audio-position {
-        left: -200px;
-        }
 
 .fliper {
     transition: transform 600ms;
@@ -35,24 +32,14 @@ JavaScript with callbacks:
 ```js
 var slider = $('.slider');
 
-// Bind synchronized listener to end of all future transitions.
-slider.transitionEnd(function () {
-    if ( slider.hasClass('video-position') ) {
-        autoPlayVideo();
-    }
-});
+// Execute callback after current transition end.
 $('.show-video').click(function () {
-    slider.addClass('video-position');
-});
-
-// Or execute callback after current transition end.
-$('.show-audio').click(function () {
-    slider.addClass('audio-position').afterTransition(function () {
-        autoPlayAudio();
+    slider.addClass('video-position').afterTransition(function () {
+        autoPlayVideo();
     });
 });
 
-// Run callback in the middle of transition.
+// Run callback in the middle of current transition.
 $('.fliper').addClass('rotate').afterTransition(0.5, function () {
     $(this).find('.backface').show();
 });
@@ -69,21 +56,11 @@ Plugin has `$.fn.afterTransition` function to execute callback after transition
 end `delay + (durationPart * duration)`. If browser doesn’t support
 CSS Transitions, callbacks will be called immediately (because there will be no animation).
 
-Main difference with `$.fn.transitionEnd` is that this method executes callback
-only once, `$.fn.transitionEnd` will add callback for all future transitions.
-Also this function doesn’t check, that transition is really finished (it can be
+This function doesn’t check, that transition is really finished (it can be
 canceled in the middle).
 
 Callback often will be synchronized with `transitionend` by
 `requestAnimationFrame` hack.
-
-If transition is set for several properties, `$.fn.transitionEnd` will execute
-callback on every property.
-
-## $.fn.transitionEnd
-
-Modern browsers have `transitionend` event. This plugin hides vendor prefix
-problem from you.
 
 If transition is set for several properties, `$.fn.transitionEnd` will execute
 callback on every property. For example:
@@ -97,12 +74,36 @@ callback on every property. For example:
 ```
 
 ```js
-$('.car').transitionEnd(function (e) {
+$('.car').addClass('at-home').afterTransition(function (e) {
     console.log(e.propertyName + ' ' + e.elapsedTime);
-}).addClass('at-home');
+});
 ```
 
 This code will print `"top 1"` and `"left 4"`.
+
+## $.fn.transitionEnd
+
+Modern browsers have `transitionend` event. This plugin hides vendor prefix
+problem from you.
+
+```js
+// Bind synchronized listener to end of all future transitions.
+slider.transitionEnd(function () {
+    if ( slider.hasClass('video-position') ) {
+        autoPlayVideo();
+    }
+});
+$('.show-video').click(function () {
+    slider.addClass('video-position');
+});
+```
+
+Main difference with `$.fn.afterTransition` is that this method adds callback
+for all future transitions, not just for current one. Also callback willn’t
+execute without CSS Transitions support.
+
+If transition is set for several properties, `$.fn.transitionEnd` will execute
+callback on every property.
 
 If transition is canceled before finishing `$.fn.transitionEnd` won’t execute
 callback (for example, you add transition to hover, and object looses hover in the
