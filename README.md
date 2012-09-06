@@ -3,10 +3,13 @@
 CSS Transition allows to write simple animation directly in CSS. It’s simpler,
 faster and cleaner, that JavaScript animation by `jQuery.fn.animate`.
 But sometimes we need good old complete callback in JavaScript for
-CSS Transitions animation (for example, if our animation isn’t so simple).
+CSS Transitions animation.
 
 This jQuery plugin allows to set listeners to [CSS Transitions] animation end or
 specific part. Plugin requires jQuery 1.8 or higher.
+
+Method `$.fn.transitionEnd` adds listener for all `transitionend` future events.
+Method `$.fn.afterTransition` executes callback only once, after transition end.
 
 CSS with transitions:
 ```css
@@ -60,10 +63,6 @@ Sponsored by [Evil Martians].
 [CSS Transitions]: https://developer.mozilla.org/en-US/docs/CSS/Using_CSS_transitions
 [Evil Martians]:   http://evilmartians.com/
 
-Method `$.fn.transitionEnd` will add listeners for all `transitionend` events,
-not just current. Method `$.fn.afterTransition` will call callback only once,
-after transition end.
-
 ## $.fn.transitionEnd
 
 Modern browsers have `transitionend` event. This plugin hides vendor prefix
@@ -88,21 +87,20 @@ $('.car').transitionEnd(function (e) {
 
 This code will print `"top 1"` and `"left 4"`.
 
-Note, if transition is canceled before finishing (for example, you add
-transition to hover effect, and object looses hover, before transition
-will ends), `$.fn.transitionEnd` won’t execute callback.
+If transition is canceled before finishing `$.fn.transitionEnd` won’t execute
+callback (for example, you add transition to hover, and object looses hover in the
+middle of animation).
 
 ## $.fn.afterTransition
 
 Plugin has `$.fn.afterTransition` function to execute callback after transition
-end `delay + (durationPart * duration)`. If browser doesn’t have
-CSS Transitions support, callbacks will be called immediately
-(because there will be no animation).
+end `delay + (durationPart * duration)`. If browser doesn’t support
+CSS Transitions, callbacks will be called immediately (because there will be no animation).
 
 Main difference with `$.fn.transitionEnd` is that this method executes callback
-only once, `$.fn.transitionEnd` will add callback for all future transitions.
+only once, `$.fn.transitionEnd` will add callback for all future transitions.
 Also this function doesn’t check, that transition is really finished (it can be
-canceled in the middle) and it doesn’t really synchronized with transition.
+canceled in the middle) and it doesn’t really synchronized with transition.
 
 If transition is set for several properties, `$.fn.transitionEnd` will execute
 callback on every property.
@@ -110,13 +108,13 @@ callback on every property.
 ## Event object
 
 Callbacks get object with properties:
-* `type` – event name. For `transitionend` event it will be often have
-   vendor prefix. For `$.fn.afterTransition` it will be `aftertransition`.
+* `type` – event name: `transitionend` (be often with vendor prefix) or 
+  `aftertransition`.
 * `currentTarget` – DOM node with CSS transition.
 * `propertyName` – CSS property name, which has transition. it will be empty,
   if CSS Transitions aren’t supported.
 * `elapsedTime` – number of seconds the transition had been running at the time
-  the event fired. This value isn't affected by the value of `transition-delay`.
+  the event fired. This value isn't affected by the value of `transition-delay`.
   It will be zero, if CSS Transitions isn’t supported.
 
 ## Extra
@@ -157,7 +155,9 @@ For Ruby on Rails you can use gem for Assets Pipeline.
 
 If you don’t use any assets packaging manager (that’s very bad idea), you can use
 already minified version of the library.
-Take it from: <https://github.com/ai/transition-events/downloads>.
+Take it from: [github.com/ai/transition-events/downloads].
+
+[github.com/ai/transition-events/downloads]: https://github.com/ai/transition-events/downloads
 
 ## Contributing
 
@@ -166,7 +166,9 @@ Open `test.html` in repository to run intergration tests.
 ## License
 
 Plugin is licensed under the GNU Lesser General Public License version 3.
-See the LICENSE file or http://www.gnu.org/licenses/lgpl.html.
+See the LICENSE file or [gnu.org/licenses/lgpl.html].
+
+[gnu.org/licenses/lgpl.html]: http://gnu.org/licenses/lgpl.html
 
 ## Author
 
