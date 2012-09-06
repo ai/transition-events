@@ -19,29 +19,15 @@ CSS with transitions:
     .slider.video-position {
         left: -100px;
         }
-
-.fliper {
-    transition: transform 600ms;
-    }
-    .fliper.rotate {
-        transform: rotateY(180deg);
-        }
 ```
 
 JavaScript with callbacks:
 ```js
-var slider = $('.slider');
-
 // Execute callback after current transition end.
 $('.show-video').click(function () {
-    slider.addClass('video-position').afterTransition(function () {
+    $('.slider').addClass('video-position').afterTransition(function () {
         autoPlayVideo();
     });
-});
-
-// Run callback in the middle of current transition.
-$('.fliper').addClass('rotate').afterTransition(0.5, function () {
-    $(this).find('.backface').show();
 });
 ```
 
@@ -56,13 +42,21 @@ Plugin has `$.fn.afterTransition` function to execute callback after transition
 end `delay + (durationPart * duration)`. If browser doesn’t support
 CSS Transitions, callbacks will be called immediately (because there will be no animation).
 
-This function doesn’t check, that transition is really finished (it can be
-canceled in the middle).
-
 Callback often will be synchronized with `transitionend` by
 `requestAnimationFrame` hack.
 
-If transition is set for several properties, `$.fn.transitionEnd` will execute
+This function doesn’t check, that transition is really finished (it can be
+canceled in the middle).
+
+If can set `durationPart` and run callback in the middle of current transition:
+
+```js
+$('.fliper').addClass('rotate').afterTransition(0.5, function () {
+    $(this).find('.backface').show();
+});
+```
+
+If transition is set for several properties, `$.fn.afterTransition` will execute
 callback on every property. For example:
 
 ```css
@@ -88,13 +82,17 @@ problem from you.
 
 ```js
 // Bind synchronized listener to end of all future transitions.
-slider.transitionEnd(function () {
-    if ( slider.hasClass('video-position') ) {
+$('.slider').transitionEnd(function () {
+    if ( $('.slider').hasClass('video-position') ) {
         autoPlayVideo();
     }
 });
 $('.show-video').click(function () {
     slider.addClass('video-position');
+});
+$('.hide-video').click(function () {
+    // It will execute transitionEnd too
+    slider.removeClass('video-position');
 });
 ```
 
