@@ -79,7 +79,7 @@
             jQuery(document).ready(function ($) {
                 $('#support').text(
                   $.Transitions.isSupported() ? 'Yes' : 'No');
-                $('#event').text($.Transitions.cachedEvent);
+                $('#event').text($.Transitions.getEvent());
 
                 var road   = $('#road');
                 var car    = $('#car');
@@ -99,9 +99,8 @@
                 };
 
                 $('#car').transitionEnd(drawMark).addClass('at-home');
-                $('#bus').addClass('at-home').
-                  afterTransition(0.3, drawMark).
-                  afterTransition(1, drawMark);
+                $('#bus').addClass('at-home').afterTransition(drawMark);
+                $('#car, #bus').afterTransition(0.5, drawMark);
             });
         </script>
     </body>
