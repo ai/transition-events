@@ -6,24 +6,22 @@ But sometimes we need good old complete callback in JavaScript for
 CSS Transitions animation (for example, if our animation isn’t so simple).
 
 This jQuery plugin allows to set listeners to [CSS Transitions] animation end or
-specific part:
+specific part. Plugin requires jQuery 1.8 or higher.
 
 CSS with transitions:
 ```css
 .slider {
     transition: left 600ms;
-    left: 0;
     }
     .slider.video-position {
         left: -100px;
         }
     .slider.audio-position {
-        left: -100px;
+        left: -200px;
         }
 
 .fliper {
     transition: transform 600ms;
-    transform: rotateY(0);
     }
     .fliper.rotate {
         transform: rotateY(180deg);
@@ -57,8 +55,6 @@ $('.fliper').addClass('rotate').afterTransition(0.5, function () {
 });
 ```
 
-Plugin requires jQuery 1.8 or higher.
-
 Sponsored by [Evil Martians].
 
 [CSS Transitions]: https://developer.mozilla.org/en-US/docs/CSS/Using_CSS_transitions
@@ -70,8 +66,8 @@ after transition end.
 
 ## $.fn.transitionEnd
 
-Modern browsers have `transitionend` event. But some browsers require
-vendor prefix for event name. This plugin hides vendor prefix problem from you.
+Modern browsers have `transitionend` event. This plugin hides vendor prefix
+problem from you.
 
 If transition is set for several properties, `$.fn.transitionEnd` will execute
 callback on every property. For example:
@@ -87,9 +83,7 @@ callback on every property. For example:
 ```js
 $('.car').transitionEnd(function (e) {
     console.log(e.propertyName + ' ' + e.elapsedTime);
-});
-
-$('.car').addClass('at-home');
+}).addClass('at-home');
 ```
 
 This code will print `"top 1"` and `"left 4"`.
@@ -100,19 +94,18 @@ will ends), `$.fn.transitionEnd` won’t execute callback.
 
 ## $.fn.afterTransition
 
-Plugin has additional `$.fn.afterTransition` function to execute callback after
-transition end `delay + (durationPart * duration)`. If browser doesn’t have
-CSS Transition support, callbacks will be called immediately (because there is
-no animation).
+Plugin has `$.fn.afterTransition` function to execute callback after transition
+end `delay + (durationPart * duration)`. If browser doesn’t have
+CSS Transitions support, callbacks will be called immediately
+(because there will be no animation).
 
 Main difference with `$.fn.transitionEnd` is that this method executes callback
 only once, `$.fn.transitionEnd` will add callback for all future transitions.
+Also this function doesn’t check, that transition is really finished (it can be
+canceled in the middle) and it doesn’t really synchronized with transition.
 
 If transition is set for several properties, `$.fn.transitionEnd` will execute
 callback on every property.
-
-Note, that function doesn’t check, that transition is really finished (it can be
-canceled in the middle) and it doesn’t really synchronized with transition.
 
 ## Event object
 
@@ -126,14 +119,9 @@ Callbacks get object with properties:
   the event fired. This value isn't affected by the value of `transition-delay`.
   It will be zero, if CSS Transitions isn’t supported.
 
-If CSS Transition is supported, `$.fn.transitionEnd` will send original browser
-event to callback (with this properties too). If you use `$.fn.afterTransition`
-or there is no CSS Transitions support, callback will receive simple object
-with just these 4 properties.
-
 ## Extra
 
-Free additional present from plugin: you can check CSS Transition support:
+Free additional present from plugin: you can check CSS Transitions support:
 
 ```js
 if ( $.TransitionEvents.isSupported() ) {
