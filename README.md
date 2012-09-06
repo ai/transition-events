@@ -17,6 +17,9 @@ CSS with transitions:
     .slider.video-position {
         left: -100px;
         }
+    .slider.audio-position {
+        left: -100px;
+        }
 
 .fliper {
     transition: transform 600ms;
@@ -29,20 +32,28 @@ CSS with transitions:
 
 JavaScript with callbacks:
 ```js
-var slider = $('.slider').transitionEnd(function () {
+var slider = $('.slider');
+
+// Bind synchronized listener to end of all future transitions.
+slider.transitionEnd(function () {
     if ( slider.hasClass('video-position') ) {
         autoPlayVideo();
     }
 });
-
 $('.show-video').click(function () {
     slider.addClass('video-position');
 });
 
-$('.fliper').addClass('rotate'),transitionAt(0.5, function () {
-    // Note, that we do double check for class, not just call `toggle`,
-    // because `transitionAt` will be fired even if transition will be canceled.
-    $(this).find('.backface').toggle($(this).hasClass('rotate'));
+// Or execute callback after current transition end.
+$('.show-audio').click(function () {
+    slider.addClass('audio-position').afterTransition(function () {
+        autoPlayAudio();
+    });
+});
+
+// Run callback in the middle of transition.
+$('.fliper').addClass('rotate').afterTransition(0.5, function () {
+    $(this).find('.backface').show();
 });
 ```
 
@@ -54,7 +65,7 @@ Sponsored by [Evil Martians].
 [Evil Martians]:   http://evilmartians.com/
 
 Method `$.fn.transitionEnd` will add listeners for all `transitionend` events,
-not just current. Method `$.fn.transitionAt` will call callback only once,
+not just current. Method `$.fn.afterTransition` will call callback only once,
 after transition end.
 
 ## $.fn.transitionEnd
@@ -87,9 +98,9 @@ Note, if transition is canceled before finishing (for example, you add
 transition to hover effect, and object looses hover, before transition
 will ends), `$.fn.transitionEnd` won’t execute callback.
 
-## $.fn.transitionAt
+## $.fn.afterTransition
 
-Plugin has additional `$.fn.transitionAt` function to execute callback after
+Plugin has additional `$.fn.afterTransition` function to execute callback after
 transition end `delay + (durationPart * duration)`. If browser doesn’t have
 CSS Transition support, callbacks will be called immediately (because there is
 no animation).
@@ -100,14 +111,14 @@ only once, `$.fn.transitionEnd` will add callback for all future transitions.
 If transition is set for several properties, `$.fn.transitionEnd` will execute
 callback on every property.
 
-Note, that `transitionAt` callback will be fired even if transition is canceled
-(because JavaScript can’t know that).
+Note, that function doesn’t check, that transition is really finished (it can be
+canceled in the middle) and it doesn’t really synchronized with transition.
 
 ## Event object
 
 Callbacks get object with properties:
 * `type` – event name. For `transitionend` event it will be often have
-   vendor prefix. For `$.fn.transitionAt` it will be `transitionat`.
+   vendor prefix. For `$.fn.afterTransition` it will be `aftertransition`.
 * `currentTarget` – DOM node with CSS transition.
 * `propertyName` – CSS property name, which has transition. it will be empty,
   if CSS Transitions aren’t supported.
@@ -116,8 +127,8 @@ Callbacks get object with properties:
   It will be zero, if CSS Transitions isn’t supported.
 
 If CSS Transition is supported, `$.fn.transitionEnd` will send original browser
-event to callback (with this properties too). If you use `$.fn.transitionAt` or
-there is no CSS Transitions support, callback will receive simple object
+event to callback (with this properties too). If you use `$.fn.afterTransition`
+or there is no CSS Transitions support, callback will receive simple object
 with just these 4 properties.
 
 ## Extra

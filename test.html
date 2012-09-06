@@ -99,9 +99,10 @@
                     height += 25;
                 };
 
-                $('#car, #bus').addClass('at-home').
-                  transitionEnd(drawMark).
-                  transitionAt(0.3, drawMark);
+                $('#car').transitionEnd(drawMark).addClass('at-home');
+                $('#bus').addClass('at-home').
+                  afterTransition(0.3, drawMark).
+                  afterTransition(1, drawMark);
             });
         </script>
     </body>
