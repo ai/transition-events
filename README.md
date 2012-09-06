@@ -124,7 +124,7 @@ Callbacks get object with properties:
 Free additional present from plugin: you can check CSS Transitions support:
 
 ```js
-if ( $.TransitionEvents.isSupported() ) {
+if ( $.Transitions.isSupported() ) {
     // CSS Transitions is supported
 }
 ```

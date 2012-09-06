@@ -79,9 +79,9 @@
         <script>
             jQuery(document).ready(function ($) {
                 $('#support').text(
-                  $.TransitionEvents.isSupported() ? 'Yes' : 'No');
-                $('#event').text($.TransitionEvents.cachedEvent);
-                $('#property').text($.TransitionEvents.cachedProp);
+                  $.Transitions.isSupported() ? 'Yes' : 'No');
+                $('#event').text($.Transitions.cachedEvent);
+                $('#property').text($.Transitions.cachedProp);
 
                 var road   = $('#road');
                 var car    = $('#car');
