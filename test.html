@@ -70,7 +70,6 @@
         <p>
             Support: <b id="support"></b>.
             Event name: <b id="event"></b>.
-            Property name: <b id="property"></b>.
         </p>
         <div id="road">
             <div id="car"></div>
@@ -81,7 +80,6 @@
                 $('#support').text(
                   $.Transitions.isSupported() ? 'Yes' : 'No');
                 $('#event').text($.Transitions.cachedEvent);
-                $('#property').text($.Transitions.cachedProp);
 
                 var road   = $('#road');
                 var car    = $('#car');
