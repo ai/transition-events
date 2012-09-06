@@ -14,7 +14,7 @@ CSS with transitions:
     transition: left 600ms;
     left: 0;
     }
-    .slider.to-right {
+    .slider.video-position {
         left: -100px;
         }
 
@@ -29,8 +29,14 @@ CSS with transitions:
 
 JavaScript with callbacks:
 ```js
-$('.slider').addClass('to-right').transitionEnd(function () {
-    playVideo( $(this).find('.right-part').find('video') );
+var slider = $('.slider').transitionEnd(function () {
+    if ( slider.hasClass('video-position') ) {
+        autoPlayVideo();
+    }
+});
+
+$('.show-video').click(function () {
+    slider.addClass('video-position');
 });
 
 $('.fliper').addClass('rotate'),transitionAt(0.5, function () {
@@ -47,15 +53,14 @@ Sponsored by [Evil Martians].
 [CSS Transitions]: https://developer.mozilla.org/en-US/docs/CSS/Using_CSS_transitions
 [Evil Martians]:   http://evilmartians.com/
 
+Method `$.fn.transitionEnd` will add listeners for all `transitionend` events,
+not just current. Method `$.fn.transitionAt` will call callback only once,
+after transition end.
+
 ## $.fn.transitionEnd
 
-Modern browsers have `transitionend` event. But some old browsers don’t support
-CSS Transitions (and this event), and others require vendor prefix for
-event name.
-
-This plugin adds syntax sugar and hides vendor prefix problem from you.
-If browser doesn’t have support, callbacks will be called immediately
-(because there is no animation).
+Modern browsers have `transitionend` event. But some browsers require
+vendor prefix for event name. This plugin hides vendor prefix problem from you.
 
 If transition is set for several properties, `$.fn.transitionEnd` will execute
 callback on every property. For example:
@@ -69,9 +74,11 @@ callback on every property. For example:
 ```
 
 ```js
-$('.car').addClass('at-home').transitionEnd(function (e) {
+$('.car').transitionEnd(function (e) {
     console.log(e.propertyName + ' ' + e.elapsedTime);
 });
+
+$('.car').addClass('at-home');
 ```
 
 This code will print `"top 1"` and `"left 4"`.
@@ -82,10 +89,13 @@ will ends), `$.fn.transitionEnd` won’t execute callback.
 
 ## $.fn.transitionAt
 
-Also plugin has additional `$.fn.transitionAt` function to set callback
-to some part of transition (for example in the middle of animation, to hide
-backface on rotate animation). Callback will be called after
-`delay + (durationPart * duration)`.
+Plugin has additional `$.fn.transitionAt` function to execute callback after
+transition end `delay + (durationPart * duration)`. If browser doesn’t have
+CSS Transition support, callbacks will be called immediately (because there is
+no animation).
+
+Main difference with `$.fn.transitionEnd` is that this method executes callback
+only once, `$.fn.transitionEnd` will add callback for all future transitions.
 
 If transition is set for several properties, `$.fn.transitionEnd` will execute
 callback on every property.
