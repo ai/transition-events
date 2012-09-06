@@ -63,6 +63,23 @@ Sponsored by [Evil Martians].
 [CSS Transitions]: https://developer.mozilla.org/en-US/docs/CSS/Using_CSS_transitions
 [Evil Martians]:   http://evilmartians.com/
 
+## $.fn.afterTransition
+
+Plugin has `$.fn.afterTransition` function to execute callback after transition
+end `delay + (durationPart * duration)`. If browser doesn’t support
+CSS Transitions, callbacks will be called immediately (because there will be no animation).
+
+Main difference with `$.fn.transitionEnd` is that this method executes callback
+only once, `$.fn.transitionEnd` will add callback for all future transitions.
+Also this function doesn’t check, that transition is really finished (it can be
+canceled in the middle).
+
+Callback often will be synchronized with `transitionend` by
+`requestAnimationFrame` hack.
+
+If transition is set for several properties, `$.fn.transitionEnd` will execute
+callback on every property.
+
 ## $.fn.transitionEnd
 
 Modern browsers have `transitionend` event. This plugin hides vendor prefix
@@ -91,20 +108,6 @@ If transition is canceled before finishing `$.fn.transitionEnd` won’t execute
 callback (for example, you add transition to hover, and object looses hover in the
 middle of animation).
 
-## $.fn.afterTransition
-
-Plugin has `$.fn.afterTransition` function to execute callback after transition
-end `delay + (durationPart * duration)`. If browser doesn’t support
-CSS Transitions, callbacks will be called immediately (because there will be no animation).
-
-Main difference with `$.fn.transitionEnd` is that this method executes callback
-only once, `$.fn.transitionEnd` will add callback for all future transitions.
-Also this function doesn’t check, that transition is really finished (it can be
-canceled in the middle) and it doesn’t really synchronized with transition.
-
-If transition is set for several properties, `$.fn.transitionEnd` will execute
-callback on every property.
-
 ## Event object
 
 Callbacks get object with properties:
@@ -125,6 +128,15 @@ Free additional present from plugin: you can check CSS Transitions support:
 if ( $.Transitions.isSupported() ) {
     // CSS Transitions is supported
 }
+```
+
+Also you can call `requestAnimationFrame`  with polyfill and vendor prefixes
+autodetection:
+
+```js
+$.Transitions.animFrame(function () {
+    // Draw something
+});
 ```
 
 ## Installing

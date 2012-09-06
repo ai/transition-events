@@ -86,8 +86,9 @@
                 var height = 0;
 
                 var drawMark = function (e) {
+                    var ms    = (new Date()).getMilliseconds()
                     var text  = e.propertyName + ' ' + e.elapsedTime + ' ' +
-                                e.currentTarget.id + ' ' + e.type;
+                                e.currentTarget.id + ' ' + e.type + ' ' + ms;
                     var width = road.width();
                     $('<i>').
                       text(text).
