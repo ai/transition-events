@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sprockets', '>= 2'
 
   s.files            = ['lib/assets/javascripts/transition-events.js',
-                        'lib/transition_events_js.rb',
+                        'lib/transition-events-js.rb',
                         'LICENSE', 'README.md', 'ChangeLog']
   s.extra_rdoc_files = ['LICENSE', 'README.md', 'ChangeLog']
   s.require_path     = 'lib'

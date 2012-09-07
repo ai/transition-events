@@ -32,7 +32,7 @@ task 'gem', 'Build RubyGem package', ->
   copy('lib/transition-events.js',
        'build/lib/assets/javascripts/transition-events.js')
   copy('gem/transition-events-js.gemspec', 'build/transition-events-js.gemspec')
-  copy('gem/transition_events_js.rb',      'build/lib/transition_events_js.rb')
+  copy('gem/transition-events-js.rb',      'build/lib/transition-events-js.rb')
   copy('README.md',                        'build/README.md')
   copy('ChangeLog',                        'build/ChangeLog')
   copy('LICENSE',                          'build/LICENSE')
