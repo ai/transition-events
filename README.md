@@ -21,9 +21,8 @@ CSS with transitions:
         }
 ```
 
-JavaScript with callbacks:
+Execute callback after current transition end:
 ```js
-// Execute callback after current transition end.
 $('.show-video').click(function () {
     $('.slider').addClass('video-position').afterTransition(function () {
         autoPlayVideo();
@@ -97,7 +96,7 @@ $('.hide-video').click(function () {
 ```
 
 Main difference with `$.fn.afterTransition` is that this method adds callback
-for all future transitions, not just for current one. Also callback willn’t
+for all future transitions, not just for current one. Also callback willn’t
 execute without CSS Transitions support.
 
 If transition is set for several properties, `$.fn.transitionEnd` will execute
@@ -116,7 +115,7 @@ Callbacks get object with properties:
 * `propertyName` – CSS property name, which has transition. it will be empty,
   if CSS Transitions aren’t supported.
 * `elapsedTime` – number of seconds the transition had been running at the time
-  the event fired. This value isn't affected by the value of `transition-delay`.
+  the event fired. This value isn't affected by the value of `transition-delay`.
   It will be zero, if CSS Transitions isn’t supported.
 
 ## Extra
