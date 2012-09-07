@@ -1,2 +1,12 @@
+== 0.2 (Antioch earthquake, 526)
+* Rename Ruby gem to transition-events-js.
+* Rename transitionAt to afterTransition.
+* Rename $.TransitionEvents to $.Transitions.
+* Don’t execute transitionEnd callback without CSS Transitions support.
+* Synchronize afterTransition with transitionend event.
+* Allow to miss durationPart argument in afterTransition.
+* Add requestAnimationFrame alias.
+* Remove $.Transitions.cachedProp.
+
 == 0.1 (Vesuvius eruption, 79 AD)
 * Initial release.
