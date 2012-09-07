@@ -1,3 +1,6 @@
+== 0.2.1 (Plague of Justinian, 541–542)
+* Fix Ruby gem loading.
+
 == 0.2 (Antioch earthquake, 526)
 * Rename Ruby gem to transition-events-js.
 * Rename transitionAt to afterTransition.
@@ -8,5 +11,5 @@
 * Add requestAnimationFrame alias.
 * Remove $.Transitions.cachedProp.
 
-== 0.1 (Vesuvius eruption, 79 AD)
+== 0.1 (Vesuvius eruption, 79)
 * Initial release.

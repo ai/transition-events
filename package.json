@@ -1,6 +1,6 @@
 {
   "name": "transition-events",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "devDependencies": {
     "coffee-script": "1.3.3",
     "fs-extra":      "0.1.3",
