@@ -96,8 +96,8 @@ $('.hide-video').click(function () {
 ```
 
 Main difference with `$.fn.afterTransition` is that this method adds callback
-for all future transitions, not just for current one. Also callback willn’t
-execute without CSS Transitions support.
+for all future transitions, not just for current one. Also callback won’t be
+executed without CSS Transitions support.
 
 If transition is set for several properties, `$.fn.transitionEnd` will execute
 callback on every property.
