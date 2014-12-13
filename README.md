@@ -30,10 +30,11 @@ $('.show-video').click(function () {
 });
 ```
 
-Sponsored by [Evil Martians].
+<a href="https://evilmartians.com/?utm_source=transition-events">
+<img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg" alt="Sponsored by Evil Martians" width="236" height="54">
+</a>
 
 [CSS Transitions]: https://developer.mozilla.org/en-US/docs/CSS/Using_CSS_transitions
-[Evil Martians]:   http://evilmartians.com/
 
 ## $.fn.afterTransition
 
